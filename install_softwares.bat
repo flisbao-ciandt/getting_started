@@ -35,6 +35,7 @@ IF %ERRORLEVEL% EQU 0 (
 )
 
 echo Installing packages with Chocolatey
+choco feature enable -n=allowGlobalConfirmation
 pause
 
 @rem ----[ Whatever you want to install, place it below this point, each item on its own line (to make it easier to find later on. ] ----
