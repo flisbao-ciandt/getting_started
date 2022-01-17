@@ -7,3 +7,8 @@
 #### Obs
  - Caso dê algum erro durante o processo, é necessário fechar o powershell e tentar novamente.
  - Caso o erro continue ocorrendo, abrir uma issue
+
+
+## Guia de Instalação de programas no Linux
+1 - Instalar o ansible - Usar o guia (https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-ansible-on-ubuntu-20-04-pt)[https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-ansible-on-ubuntu-20-04-pt]
+2 - Rodar o comando ansible-playbook apontando pro ansible-playbook.yaml como sudo

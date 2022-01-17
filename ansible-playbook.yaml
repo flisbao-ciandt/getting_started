@@ -1,0 +1,70 @@
+- hosts: localhost
+  gather_facts: yes
+  become: yes
+  vars:
+    NODEJS_VERSION: "16"
+
+  tasks:
+    - name: update_packages
+      become: true
+      become_user: root
+      apt:
+        update_cache: yes
+        upgrade: dist
+    - name: install packages
+      become: true
+      become_user: root
+      apt:
+        state: present
+        name: 
+          - curl
+          - wget
+          - apt-transport-https
+          - ca-certificates
+          - software-properties-common
+          - build-essential
+          - procps
+          - file
+          - git
+    - name: get node
+      become: true
+      shell: cd ~ && curl -sL https://deb.nodesource.com/setup_16.x -o nodesource_setup.sh
+    - name: execute node setup
+      become: true
+      become_user: root
+      shell: bash ~/nodesource_setup.sh
+    - name: install node
+      become: true
+      become_user: root
+      apt:
+        state: present
+        name: 
+          - nodejs
+    - name: add gpg-key
+      become: true
+      become_user: root
+      shell: curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+    - name: update gpg
+      become: true
+      become_user: root
+      ansible.builtin.apt_repository:
+        repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable
+        state: present
+    - name: update_packages
+      become: true
+      become_user: root
+      apt:
+        update_cache: yes
+        upgrade: dist
+    - name: install docker-ce
+      become: true
+      become_user: root
+      apt:
+        state: present
+        name: 
+          - docker-ce
+    - name: install docker-compose
+      become: true
+      become_user: root
+      pip:
+        name: docker-compose
